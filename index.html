@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.10/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="font2/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+    <title>e-commerce</title>
+</head>
+<body>
+       <div id="root">
+        <div  class="copertina" :class="(cerca==''?'visibile':'invisibile')">
+   
+                       <div class="coverTitle">
+                             <h2>Shop Online</h2>
+                             <p>In vendita Smartphone smartwatch di ultimissima generazione sia nuovi che ricondizionati</p>
+                       </div>
+
+        </div>
+                <header>
+                    <h2>SM </>-Tecnology</h2>
+                    <select v-model="cerca" name="" id=""> 
+                             <option value="">home</option>
+                            <option v-for="genere in generi">{{genere}}</option>
+                    </select>
+                </header>
+                <main>
+                    <div class="mainLeft">
+                          
+                              <div v-if="scegli(card)" v-for="card in prodotti" class="boxCard">
+                                   <div class="boxFoto">
+                                    <img :src="card.foto" alt="">
+                                   </div>
+                                   <div class="descrizione">
+                                    <span class="Title" style="color: rgb(45, 45, 144);"><b>Marca</b></span> </> <span>{{card.marca}}</span><br>
+                                    <span class="Title" style="color: rgb(45, 45, 144);"><b>Modello</b></span> </> <span>{{card.modello}}</span><br>
+                                    <span class="Title" style="color: rgb(45, 45, 144);"><b>Ram</b></span> </> <span>{{card.ram}}</span><br>
+                                    <span class="Title" style="color: rgb(45, 45, 144);"><b>Memoria Interna</b></span> </> <span>{{card.memoriainterna}}</span><br>
+                                    <span class="Title" style="color: rgb(45, 45, 144);"><b>Prezzo</b></span> </> <span>{{card.prezzo}} </> € </span>
+                                   </div>
+                                   <div class="boxAcquista">
+                                    <button @click="invia(card.modello,card.prezzo)" class="compra" :name="card.modello"  :value="card.prezzo" ><i class="fa-solid fa-square-plus"></i> <h4>Compra</h4></button>
+                                   </div>
+                              </div>
+                    </div>
+                    <div class="mainRight">
+                         <div class="listaCarrello">
+                                  <h4>Lista Carrello</h4>
+                                  <ul id="list">
+                                      <li v-for="(el, index) in lista">{{el.nome+' '+'prezzo'+' '+el.prezzo}} <span class="togli"><i style="color:dodgerblue"  @click="elimina(index)" class="fa-solid fa-delete-left"></i></span></li>
+                                  </ul>
+                         </div>
+                    </div>
+                </main>
+                <footer>
+                          <button @click="totale" id="sum">totale carrello</button>
+                          <div class="cart">
+                                   <h4 id="mioTotale">Totale</h4>
+                          </div>
+                </footer>
+                
+       </div>
+
+       <script src="main.js"></script>
+
+</body>
+</html>
